@@ -58,7 +58,7 @@ regla(requiere_escalado) :-
     hecho(memoria_alta),
     hecho(tiempo_respuesta_lento).
 
-% Regla 5: Actividad maliciosa sofisticada
+% Regla 5: Actividad maliciosa 
 regla(posible_actividad_sigilosa) :-
     hecho(tokens_invalidos),
     hecho(usuarios_inexistentes_detectados),
