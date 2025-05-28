@@ -1,4 +1,4 @@
-% Declarar que `hecho/1` es un predicado dinamico
+% Declarar que hecho/1 es un predicado dinamico
 :- dynamic hecho/1.
 
 % -----------------------------
@@ -75,18 +75,18 @@ diagnosticar :-
         orientacion(posible_fuerza_bruta)
 
     ; regla(posible_ddos) ->
-        nl, write('----Diagnostico de seguridad: **POSIBLE ATAQUE DISTRIBUIDO DE DENEGACIÓN DE SERVICIO (DDoS)**----'), nl,
+        nl, write('----Diagnostico de seguridad: **POSIBLE ATAQUE DISTRIBUIDO DE DENEGACION DE SERVICIO (DDoS)**----'), nl,
         write('Descripcion: Alta tasa de accesos junto a tokens invalidos y latencia elevada sugieren una sobrecarga maliciosa del servidor.'), nl, nl,
         orientacion(posible_ddos)
 
     ; regla(posible_sobrecarga_legitima) ->
-        nl, write('----Diagnostico de rendimiento: **SOBRECARGA DEL SISTEMA DEBIDA A ALTA ACTIVIDAD LEGÍTIMA**----'), nl,
+        nl, write('----Diagnostico de rendimiento: **SOBRECARGA DEL SISTEMA DEBIDA A ALTA ACTIVIDAD LEGITIMA**----'), nl,
         write('Descripcion: El sistema opera bajo una alta demanda justificada por usuarios validos. No se detectan patrones maliciosos.'), nl, nl,
         orientacion(posible_sobrecarga_legitima)
 
     ; regla(requiere_escalado) ->
         nl, write('----Diagnostico de capacidad: **EL SERVIDOR REQUIERE ESCALADO DE RECURSOS**----'), nl,
-        write('Descripcion: Se detecta uso crítico de CPU y RAM junto a latencia, lo cual sugiere que la infraestructura es insuficiente.'), nl, nl,
+        write('Descripcion: Se detecta uso critico de CPU y RAM junto a latencia, lo cual sugiere que la infraestructura es insuficiente.'), nl, nl,
         orientacion(requiere_escalado)
 
     ; regla(posible_actividad_sigilosa) ->
@@ -99,7 +99,6 @@ diagnosticar :-
         findall(H, hecho(H), Hechos),
         listar_sugerencias_parciales(Hechos)
     ).
-
 
 % -----------------------------
 % Orientaciones por diagnostico
@@ -120,7 +119,7 @@ orientacion(posible_ddos) :-
 orientacion(posible_sobrecarga_legitima) :-
     write('Recomendaciones tecnicas:'), nl,
     write('- Evaluar la posibilidad de autoescalado de recursos.'), nl,
-    write('- Optimizar consultas a base de datos y caché de contenido.'), nl,
+    write('- Optimizar consultas a base de datos y cache de contenido.'), nl,
     write('- Implementar herramientas de monitoreo para anticipar picos de trafico.'), nl.
 
 orientacion(requiere_escalado) :-
@@ -131,9 +130,9 @@ orientacion(requiere_escalado) :-
 
 orientacion(posible_actividad_sigilosa) :-
     write('Recomendaciones tecnicas:'), nl,
-    write('- Investigar la posibilidad de exploits avanzados dirigidos a la capa de autenticación.'), nl,
-    write('- Revisar integridad de librerías, sesiones activas y verificar logs de seguridad más allá del acceso web.'), nl,
-    write('- Activar alertas tempranas y sistemas de detección de intrusos (IDS).'), nl.
+    write('- Investigar la posibilidad de exploits avanzados dirigidos a la capa de autenticacion.'), nl,
+    write('- Revisar integridad de librerias, sesiones activas y verificar logs de seguridad mas alla del acceso web.'), nl,
+    write('- Activar alertas tempranas y sistemas de deteccion de intrusos (IDS).'), nl.
 
 % -----------------------------
 % Interfaz con el usuario
@@ -148,3 +147,12 @@ realizar_diagnostico :-
     )),
     nl, write('--- Resultados del Diagnostico ---'), nl,
     diagnosticar.
+
+% -----------------------------
+% Listar hechos parciales
+% -----------------------------
+
+listar_sugerencias_parciales([]).
+listar_sugerencias_parciales([H|T]) :-
+    write('- Hecho activado: '), write(H), nl,
+    listar_sugerencias_parciales(T).
